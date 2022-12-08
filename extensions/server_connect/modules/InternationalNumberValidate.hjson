@@ -1,0 +1,36 @@
+[
+    {
+        type: 'InternationalNumberValidate',
+        module: 'InternationalNumberValidate',
+        action: 'InternationalNumberValidate',
+        groupTitle: 'Validator',
+        groupIcon: 'fas fa-lg fa-file comp-files',
+        title : 'International number validate @@var(name)@@',
+        icon : 'fas fa-phone-alt comp-security',
+        dataScheme: [
+            {name: 'IsValid', type: 'boolean'},
+            {name: 'PhoneNumber', type: 'text'},
+            {name: 'CountryIso2', type: 'text'},
+            {name: 'CountryIso3', type: 'text'},
+            {name: 'CountryCode', type: 'text'}
+        ],
+        dataPickObject: true,
+        properties : [
+            {
+                 
+                group: 'Phone number details',
+                variables: [
+                    { name: 'name', optionName: 'name', title: 'Name<sup style="color:red">*</sup>', type: 'text', required: true, defaultValue: 'compressImage'},
+                    
+                    { name: 'phone_number', optionName: 'phone_number', title: 'Phone_number<sup style="color:red">*</sup>', type: 'text', required: true, serverDataBindings: true},
+
+                    { name: 'country_code', optionName: 'country_code', title: 'Country code<sup style="color:red">*</sup>', type: 'text', required: true, defaultValue: 'Ae',serverDataBindings: true},
+
+
+                     { name: 'output', optionName: 'output', title: 'Output', type: 'boolean', defaultValue: false }
+
+                ]
+            }
+        ]    
+    }                     
+]

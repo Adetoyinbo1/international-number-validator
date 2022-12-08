@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "code"
+      },
+      {
+        "type": "text",
+        "name": "number"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "validate",
+        "module": "InternationalNumberValidate",
+        "action": "InternationalNumberValidate",
+        "options": {
+          "phone_number": "{{$_POST.number}}",
+          "country_code": "{{$_POST.code}}"
+        },
+        "meta": [
+          {
+            "name": "IsValid",
+            "type": "boolean"
+          },
+          {
+            "name": "PhoneNumber",
+            "type": "text"
+          },
+          {
+            "name": "CountryIso2",
+            "type": "text"
+          },
+          {
+            "name": "CountryIso3",
+            "type": "text"
+          },
+          {
+            "name": "CountryCode",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{validate.IsValid}}",
+          "then": {
+            "steps": {
+              "name": "successRes",
+              "module": "core",
+              "action": "response",
+              "options": {
+                "status": 200,
+                "data": "Phone number valid"
+              }
+            }
+          },
+          "else": {
+            "steps": {
+              "name": "successRes_copy",
+              "module": "core",
+              "action": "response",
+              "options": {
+                "status": 400,
+                "data": "Phone number invalid"
+              }
+            }
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}

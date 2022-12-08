@@ -1,0 +1,24 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="index" appConnect="local" components="{dmxNotifications:{}}" -->
+<dmx-notifications id="notifies1"></dmx-notifications>
+<dmx-json-datasource id="jsonDS1" is="dmx-serverconnect" url="/countryList.json"></dmx-json-datasource>
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-12">
+            <form is="dmx-serverconnect-form" id="serverconnectform1" method="post" action="/api/validateNumber" dmx-on:success="notifies1.success('Phone number valid')" dmx-on:invalid="notifies1.warning(lastError.response)">
+
+                <div class="form-group md-3"> <label for="number" class="form-label">Some text</label>
+                    <div class="d-flex">
+                        <div class="d-flex w-auto">
+                            <select id="code" class="form-select" name="code" dmx-bind:options="jsonDS1.data" optiontext="code+' '+dial_code" optionvalue="code" dmx-bind:value="'AE'">
+                            </select>
+                        </div>
+                        <div class="d-flex"><input type="text" class="form-control" id="number" name="number" aria-describedby="input1_help" placeholder="Enter number"></div>
+                    </div>
+
+                    <small id="input1_help" class="form-text text-muted">Your input is very valuable.</small>
+                </div><button id="btn1" class="btn btn-primary mt-2" type="submit">Verify number</button>
+            </form>
+        </div>
+    </div>
+</div>
+<meta name="ac:route" content="/">
